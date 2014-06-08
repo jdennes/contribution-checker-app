@@ -1,6 +1,7 @@
 require "sinatra"
 require "rest_client"
 require "json"
+require "sinatra/json"
 require "contribution-checker"
 
 CLIENT_ID = ENV["GITHUB_CLIENT_ID"]
@@ -20,35 +21,38 @@ get "/" do
   if !authenticated?
     authenticate!
   else
-    access_token = session[:access_token]
+    @access_token = session[:access_token]
 
     begin
       auth_result = RestClient.get(
         "https://api.github.com/user",
-        { :params => { :access_token => access_token}, :accept => :json })
+        { :params => { :access_token => @access_token}, :accept => :json })
     rescue => e
       # Token has been revoked. Invalidate the token in the session.
       session[:access_token] = nil
       return authenticate!
     end
 
-    auth_result = JSON.parse(auth_result)
-    if params[:url]
-      checker = ContributionChecker::Checker.new \
-        :access_token => access_token,
-        :commit_url => params[:url]
+    return check if params[:url]
 
-      begin
-        result = checker.check
-        result[:commit_url] = params[:url]
-      rescue ContributionChecker::InvalidCommitUrlError => err
-        return erb :index, :locals => { :error_message => err }
-      end
-      erb :result, :locals => result
-    else
-      erb :index
-    end
+    erb :index
   end
+end
+
+def check
+  checker = ContributionChecker::Checker.new \
+    :access_token => @access_token,
+    :commit_url => params[:url]
+
+  begin
+    result = checker.check
+    result[:commit_url] = params[:url]
+  rescue ContributionChecker::InvalidCommitUrlError => err
+    return erb :index, :locals => { :error_message => err }
+  end
+  erb :result, :locals => result
+
+  # json :foo => 'bar'
 end
 
 get "/callback" do
