@@ -13,7 +13,7 @@ def authenticated?
 end
 
 def authenticate!
-  redirect "https://github.com/login/oauth/authorize?scope=public_repo,user:email&client_id=#{CLIENT_ID}"
+  redirect "https://github.com/login/oauth/authorize?scope=user:email&client_id=#{CLIENT_ID}"
 end
 
 get "/" do
