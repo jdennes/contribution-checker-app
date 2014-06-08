@@ -32,9 +32,14 @@
       <div class="page-header text-center">
         <h1>Contribution check results are in!</h1>
 
-        <p class="lead">This commit <span style="padding: 0 3px" class="bg-<% if contribution %>success<% else %>danger<% end %>">
-          <% if contribution %> should be <% else %> will not be <% end %>
-          counted</span> as a contribution! Check the details below.</p>
+        <p class="lead">Your <a href="<%= commit_url %>" target="_blank">commit</a>
+          <span style="padding: 0 3px" class="bg-<% if contribution %>success<% else %>danger<% end %>">
+          <% if contribution %>
+            should be
+          <% else %>
+            will not be
+          <% end %>
+          counted</span> as a contribution! Check the details below:</p>
       </div>
 
         <table class="table table-condensed table-responsive">

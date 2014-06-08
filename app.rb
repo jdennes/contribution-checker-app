@@ -39,6 +39,7 @@ get "/" do
         :commit_url => params[:url]
 
       result = checker.check
+      result[:commit_url] = params[:url]
       erb :result, :locals => result
     else
       erb :index
