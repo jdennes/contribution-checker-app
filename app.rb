@@ -21,23 +21,15 @@ get "/" do
     authenticate!
   else
     access_token = session[:access_token]
-    scopes = []
 
     begin
       auth_result = RestClient.get(
         "https://api.github.com/user",
         { :params => { :access_token => access_token}, :accept => :json })
     rescue => e
-      # Request didn't succeed because the token was revoked so we
-      # invalidate the token stored in the session and render the
-      # index page so that the user can start the OAuth flow again
+      # Token has been revoked. Invalidate the token in the session.
       session[:access_token] = nil
       return authenticate!
-    end
-
-    # The request succeeded, so we check the list of current scopes
-    if auth_result.headers.include? :x_oauth_scopes
-      scopes = auth_result.headers[:x_oauth_scopes].split(', ')
     end
 
     auth_result = JSON.parse(auth_result)
@@ -45,6 +37,7 @@ get "/" do
       checker = ContributionChecker::Checker.new \
         :access_token => access_token,
         :commit_url => params[:url]
+
       result = checker.check
       erb :result, :locals => result
     else
