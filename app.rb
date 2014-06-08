@@ -38,8 +38,12 @@ get "/" do
         :access_token => access_token,
         :commit_url => params[:url]
 
-      result = checker.check
-      result[:commit_url] = params[:url]
+      begin
+        result = checker.check
+        result[:commit_url] = params[:url]
+      rescue ContributionChecker::InvalidCommitUrlError => err
+        return erb :index, :locals => { :error_message => err }
+      end
       erb :result, :locals => result
     else
       erb :index

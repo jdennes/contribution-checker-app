@@ -23,19 +23,25 @@
 
       <div class="page-header text-center">
         <h1>GitHub Contribution Checker</h1>
-
         <p class="lead">
           So, you want to check if your commit is counted as a GitHub contribution?
           <br>
           Step right up and enter your commit URL:
         </p>
-
-        <form class="form" role="form" method="get">
-          <div class="form-group">
-            <input class="form-control span6" name="url" placeholder="https://github.com/:user/:repo/commit/:sha" autofocus>
-          </div>
-        </form>
       </div>
+
+      <% if defined? error_message %>
+      <div class="alert alert-danger">
+        <strong><%= error_message %></strong>
+      </div>
+      <% end %>
+
+      <form class="form" role="form" method="get">
+        <div class="form-group">
+          <input class="form-control span6" name="url" placeholder="https://github.com/:user/:repo/commit/:sha" autofocus>
+        </div>
+      </form>
+
     </div>
   </body>
 </html>
