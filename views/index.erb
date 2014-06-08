@@ -1,8 +1,35 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<html>
-  <head></head>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GitHub contribution checker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.css">
+    <style media="screen">
+      .container {
+        max-width: 730px;
+      }
+    </style>
+  </head>
   <body>
-    <p>Authenticated. Show the form to allow a commit URL to be entered.</p>
+    <div class="container">
+
+      <div class="page-header text-center">
+        <h1>GitHub Contribution Checker</h1>
+
+        <p class="lead">
+          So, you want to check if some GitHub contributions will be counted for you?
+          <br>
+          Step right up and use the input box below to specify the commit URL!
+        </p>
+
+        <form class="form" role="form" method="get">
+          <div class="form-group">
+            <input class="form-control span6" name="url" placeholder="https://github.com/:user/:repo/commit/:sha">
+          </div>
+        </form>
+      </div>
+    </div>
   </body>
 </html>
