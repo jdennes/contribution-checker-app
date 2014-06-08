@@ -24,14 +24,13 @@ get "/" do
     scopes = []
 
     begin
-      auth_result = RestClient.get("https://api.github.com/user",
-                                   {:params => {:access_token => access_token},
-                                    :accept => :json})
+      auth_result = RestClient.get(
+        "https://api.github.com/user",
+        { :params => { :access_token => access_token}, :accept => :json })
     rescue => e
       # Request didn't succeed because the token was revoked so we
       # invalidate the token stored in the session and render the
       # index page so that the user can start the OAuth flow again
-
       session[:access_token] = nil
       return authenticate!
     end
@@ -56,11 +55,12 @@ end
 
 get "/callback" do
   session_code = request.env["rack.request.query_hash"]["code"]
-  result = RestClient.post("https://github.com/login/oauth/access_token",
-                          {:client_id => CLIENT_ID,
-                           :client_secret => CLIENT_SECRET,
-                           :code => session_code},
-                           :accept => :json)
+  result = RestClient.post(
+    "https://github.com/login/oauth/access_token",
+    { :client_id => CLIENT_ID,
+      :client_secret => CLIENT_SECRET,
+      :code => session_code },
+    :accept => :json)
   session[:access_token] = JSON.parse(result)["access_token"]
   redirect "/"
 end
