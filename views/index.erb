@@ -11,8 +11,7 @@
         background-image: url('/background.png');
         background-repeat: repeat-x; }
         .container {
-          max-width: 768px;
-          padding-top: 40px; }
+          max-width: 768px; padding-top: 40px; }
         .alert {
           display: none; }
         #waiting {
@@ -30,9 +29,8 @@
 
       <div class="page-header text-center">
         <h1>GitHub Contribution Checker</h1>
-        <p class="lead">Enter your commit URL to check whether it&rsquo;s counted as
-          a GitHub contribution:
-        </p>
+        <p class="lead">Enter your commit URL to check whether it&rsquo;s
+          counted as a GitHub contribution:</p>
       </div>
 
       <div id="err" class="alert alert-danger"></div>
@@ -48,18 +46,15 @@
       </form>
 
       <div id="waiting">
-        <p class="lead text-muted">Checking your commit. We&rsquo;ll be back in just a moment &#8230;</p>
+        <p class="lead text-muted">Checking your commit. We&rsquo;ll be back in
+          just a moment &#8230;</p>
       </div>
 
       <div id="results"></div>
       <script id="results-template" type="text/x-handlebars-template">
       <p class="lead">Your <a href="{{commit_url}}" target="_blank">commit</a>
         <span style="padding: 0 3px" class="bg-{{#if contribution}}success{{else}}danger{{/if}}">
-        {{#if contribution}}
-          should be
-        {{else}}
-          will not be
-        {{/if}}
+        {{#if contribution}}should be{{else}}will not be{{/if}}
         counted</span> as a contribution! Check the details below:
       </p>
 

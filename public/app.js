@@ -7,21 +7,18 @@
     renderResults = Handlebars.compile($("#results-template").html());
   }
 
-  function ready(data) {
-    setupRenderers();
+  function setupEventHandlers() {
     $(".form").submit(function() { return false; });
     $(".form input").keypress(function(e) {
-      if(e.which == 13) {
+      // Capture when "Enter" is pressed
+      if (e.which == 13) {
         $(".alert").hide();
         $("#results").hide();
         $("input").attr("disabled", "");
         $("#waiting").show();
         var commit_url = $("input[name=url]").val();
         $.ajax({
-          type: "POST",
-          url: "/",
-          data: "url=" + commit_url,
-          dataType: "json",
+          type: "POST", url: "/", data: "url=" + commit_url, dataType: "json",
           success: function(data) {
             if (data.error_message) {
               $("#err").html(renderError(data)).show();
@@ -41,6 +38,11 @@
         });
       }
     });
+  }
+
+  function ready(data) {
+    setupRenderers();
+    setupEventHandlers();
   }
 
   ready();
