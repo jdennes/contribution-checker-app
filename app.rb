@@ -32,11 +32,27 @@ get "/" do
       session[:access_token] = nil
       return authenticate!
     end
-
-    return check if params[:url]
-
     erb :index
   end
+end
+
+post "/" do
+  if !authenticated?
+    authenticate!
+  else
+    @access_token = session[:access_token]
+
+    begin
+      auth_result = RestClient.get(
+        "https://api.github.com/user",
+        { :params => { :access_token => @access_token}, :accept => :json })
+    rescue => e
+      # Token has been revoked. Invalidate the token in the session.
+      session[:access_token] = nil
+      return authenticate!
+    end
+  end
+  check
 end
 
 def check
@@ -48,11 +64,9 @@ def check
     result = checker.check
     result[:commit_url] = params[:url]
   rescue ContributionChecker::InvalidCommitUrlError => err
-    return erb :index, :locals => { :error_message => err }
+    return json :error_message => err
   end
-  erb :result, :locals => result
-
-  # json :foo => 'bar'
+  json result
 end
 
 get "/callback" do

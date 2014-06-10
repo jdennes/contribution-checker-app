@@ -8,13 +8,30 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.css">
     <style media="screen">
       body {
-        background-image:url('/background.png');
-        background-repeat: repeat-x;
-      }
-      .container {
-        max-width: 768px;
-        padding-top: 40px;
-      }
+        background-image: url('/background.png');
+        background-repeat: repeat-x; }
+        .container {
+          max-width: 768px; padding-top: 40px; }
+        .alert {
+          display: none; }
+        #waiting {
+          display: none; }
+        #results {
+          display: none; }
+          table td span {
+            padding-right: 40px; }
+          .table td:first-child {
+            padding-left: 40px; }
+        .flash {
+          color: #f90;
+          -webkit-animation: flash 1.5s infinite linear;
+          -moz-animation: flash 1.5s infinite linear;
+          -o-animation: flash 1.5s infinite linear;
+          animation: flash 1.5s infinite linear; }
+        @-webkit-keyframes flash { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
+        @-moz-keyframes flash { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
+        @-o-keyframes flash { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
+        @keyframes flash { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
     </style>
   </head>
   <body>
@@ -22,23 +39,85 @@
 
       <div class="page-header text-center">
         <h1>GitHub Contribution Checker</h1>
-        <p class="lead">Enter your commit URL to check whether it's counted as
-          a GitHub contribution:
-        </p>
+        <p class="lead">Enter your commit URL to check whether it&rsquo;s
+          counted as a GitHub contribution:</p>
       </div>
 
-      <% if defined? error_message %>
-      <div class="alert alert-danger">
-        <strong><%= error_message %></strong>
-      </div>
-      <% end %>
+      <div id="err" class="alert alert-danger"></div>
+      <script id="err-template" type="text/x-handlebars-template">
+        <strong>{{error_message}}</strong>
+      </script>
 
-      <form class="form" role="form" method="get">
+      <form class="form" role="form" method="post">
         <div class="form-group">
           <input class="form-control span6" name="url"
             placeholder="https://github.com/:user/:repo/commit/:sha" autofocus>
         </div>
       </form>
+
+      <div id="waiting">
+        <p class="lead text-muted text-center">
+          <span class="glyphicon glyphicon-flash flash"></span>
+          Hardcore API action. We&rsquo;ll be back in just a moment &#8230;</p>
+      </div>
+
+      <div id="results"></div>
+      <script id="results-template" type="text/x-handlebars-template">
+      <p class="lead">Your <a href="{{commit_url}}" target="_blank">commit</a>
+        <span style="padding: 0 3px" class="bg-{{#if contribution}}success{{else}}danger{{/if}}">
+        {{#if contribution}}should be{{else}}will not be{{/if}}
+        counted</span> as a contribution! Check the details below:
+      </p>
+
+      <table class="table table-condensed table-responsive">
+        <thead>
+          <tr class="{{#if contribution}}success{{else}}danger{{/if}}">
+            <td><h4>All of the following rules need to be true</h4></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="{{#if and_criteria.commit_in_valid_branch}}success{{else}}danger{{/if}}">
+            <td><span class="glyphicon glyphicon-{{#if and_criteria.commit_in_valid_branch}}ok{{else}}remove{{/if}}"></span> Is the commit in the default or gh-pages branch? </td>
+          </tr>
+          <tr class="{{#if and_criteria.commit_in_last_year}}success{{else}}danger{{/if}}">
+            <td><span class="glyphicon glyphicon-{{#if and_criteria.commit_in_last_year}}ok{{else}}remove{{/if}}"></span> Was the commit authored in the last year?</td>
+          </tr>
+          <tr class="{{#if and_criteria.repo_not_a_fork}}success{{else}}danger{{/if}}">
+            <td><span class="glyphicon glyphicon-{{#if and_criteria.repo_not_a_fork}}ok{{else}}remove{{/if}}"></span> Is the repository containing the commit a fork?</td>
+          </tr>
+          <tr class="{{#if and_criteria.commit_email_linked_to_user}}success{{else}}danger{{/if}}">
+            <td><span class="glyphicon glyphicon-{{#if and_criteria.commit_email_linked_to_user}}ok{{else}}remove{{/if}}"></span> Is the email used to author the commit listed in the user&rsquo;s email settings?</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="table table-condensed">
+        <thead>
+          <tr class="{{#if contribution}}success{{else}}danger{{/if}}">
+            <td><h4> At least one of the following rules needs to be true</h4></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="{{#if or_criteria.user_has_starred_repo}}success{{else}}danger{{/if}}">
+            <td><span class="glyphicon glyphicon-{{#if or_criteria.user_has_starred_repo}}ok{{else}}remove{{/if}}"></span> Has the user starred the repository containing the commit?</td>
+          </tr>
+          <tr class="{{#if or_criteria.user_can_push_to_repo}}success{{else}}danger{{/if}}">
+            <td><span class="glyphicon glyphicon-{{#if or_criteria.user_can_push_to_repo}}ok{{else}}remove{{/if}}"></span> Does the user have push access to the repository?</td>
+          </tr>
+          <tr class="{{#if or_criteria.user_is_repo_org_member}}success{{else}}danger{{/if}}">
+            <td><span class="glyphicon glyphicon-{{#if or_criteria.user_is_repo_org_member}}ok{{else}}remove{{/if}}"></span> Is the user a member of the organization that owns the repository?</td>
+          </tr>
+          <tr class="{{#if or_criteria.user_has_fork_of_repo}}success{{else}}danger{{/if}}">
+            <td><span class="glyphicon glyphicon-{{#if or_criteria.user_has_fork_of_repo}}ok{{else}}remove{{/if}}"></span> Does the user own a fork of the repository containing the commit?</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </script>
+
     </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.4/handlebars.min.js"></script>
+    <script src="/app.js"></script>
   </body>
 </html>
