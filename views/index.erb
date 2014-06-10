@@ -8,13 +8,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.css">
     <style media="screen">
       body {
-        background-image:url('/background.png');
-        background-repeat: repeat-x;
-      }
-      .container {
-        max-width: 768px;
-        padding-top: 40px;
-      }
+        background-image: url('/background.png');
+        background-repeat: repeat-x; }
+        .container {
+          max-width: 768px;
+          padding-top: 40px; }
+        .alert {
+          display: none; }
+        #results {
+          display: none; }
+          table td span {
+            padding-right: 40px; }
+          .table td:first-child {
+            padding-left: 40px; }
     </style>
   </head>
   <body>
@@ -27,18 +33,34 @@
         </p>
       </div>
 
-      <% if defined? error_message %>
-      <div class="alert alert-danger">
-        <strong><%= error_message %></strong>
-      </div>
-      <% end %>
+      <div id="err" class="alert alert-danger"></div>
+      <script id="err-template" type="text/x-handlebars-template">
+        <strong>{{error_message}}</strong>
+      </script>
 
-      <form class="form" role="form" method="get">
+      <form class="form" role="form" method="post">
         <div class="form-group">
           <input class="form-control span6" name="url"
             placeholder="https://github.com/:user/:repo/commit/:sha" autofocus>
         </div>
       </form>
+
+      <div id="results"></div>
+      <script id="results-template" type="text/x-handlebars-template">
+      <p class="lead">Your <a href="{{commit_url}}" target="_blank">commit</a>
+        <span style="padding: 0 3px" class="bg-{{#if contribution}}success{{else}}danger{{/if}}">
+        {{#if contribution}}
+          should be
+        {{else}}
+          will not be
+        {{/if}}
+        counted</span> as a contribution! Check the details below:
+      </p>
+      </script>
+
     </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/handlebars.js"></script>
+    <script src="/app.js"></script>
   </body>
 </html>
