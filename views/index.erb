@@ -22,6 +22,16 @@
             padding-right: 40px; }
           .table td:first-child {
             padding-left: 40px; }
+        .flash {
+          color: yellow;
+          -webkit-animation: flash 1.5s infinite linear;
+          -moz-animation: flash 1.5s infinite linear;
+          -o-animation: flash 1.5s infinite linear;
+          animation: flash 1.5s infinite linear; }
+        @-webkit-keyframes flash { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
+        @-moz-keyframes flash { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
+        @-o-keyframes flash { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
+        @keyframes flash { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
     </style>
   </head>
   <body>
@@ -46,8 +56,9 @@
       </form>
 
       <div id="waiting">
-        <p class="lead text-muted">Checking your commit. We&rsquo;ll be back in
-          just a moment &#8230;</p>
+        <p class="lead text-muted text-center">
+          <span class="glyphicon glyphicon-flash flash"></span>
+          Hardcore API action. We&rsquo;ll be back in just a moment &#8230;</p>
       </div>
 
       <div id="results"></div>
