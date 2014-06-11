@@ -39,7 +39,7 @@
 
       <div class="page-header text-center">
         <h1>GitHub Contribution Checker</h1>
-        <p class="lead">Enter your commit URL to check whether it&rsquo;s
+        <p class="lead text-left">Enter your commit URL to check whether it&rsquo;s
           counted as a GitHub contribution:</p>
       </div>
 
@@ -54,6 +54,17 @@
             placeholder="https://github.com/:user/:repo/commit/:sha" autofocus>
         </div>
       </form>
+
+      <% if !recent_commits.empty? %>
+      <div id="recent-commits">
+        <p class="lead">Or check one of your recent commits:</p>
+        <ul>
+          <% for c in recent_commits %>
+          <li><a href="#" data-commit-url="<%= c[:html_url] %>" title="<%= c[:message] %>"><%= c[:shortcut] %></a></li>
+          <% end %>
+        </ul>
+      </div>
+      <% end %>
 
       <div id="waiting">
         <p class="lead text-muted text-center">
