@@ -94,7 +94,7 @@
             <td><span class="glyphicon glyphicon-{{#if and_criteria.commit_in_last_year}}ok{{else}}remove{{/if}}"></span> Was the commit authored in the last year?</td>
           </tr>
           <tr class="{{#if and_criteria.repo_not_a_fork}}success{{else}}danger{{/if}}">
-            <td><span class="glyphicon glyphicon-{{#if and_criteria.repo_not_a_fork}}ok{{else}}remove{{/if}}"></span> Is the repository containing the commit a fork?</td>
+            <td><span class="glyphicon glyphicon-{{#if and_criteria.repo_not_a_fork}}ok{{else}}remove{{/if}}"></span> Is the repository containing the commit <em>not</em> a fork?</td>
           </tr>
           <tr class="{{#if and_criteria.commit_email_linked_to_user}}success{{else}}danger{{/if}}">
             <td><span class="glyphicon glyphicon-{{#if and_criteria.commit_email_linked_to_user}}ok{{else}}remove{{/if}}"></span> Is the email used to author the commit listed in the user&rsquo;s email settings?</td>
