@@ -117,9 +117,9 @@
       <% if !recent_commits.empty? %>
       <div id="recent-commits">
         <p class="lead">Or, check one of your recent commits:</p>
-        <ul>
+        <ul class="list-group">
           <% for c in recent_commits %>
-          <li><a href="#" data-commit-url="<%= c[:html_url] %>" title="<%= c[:message] %>"><%= c[:shortcut] %></a></li>
+          <li class="list-group-item"><a href="#" data-commit-url="<%= c[:html_url] %>" title="<%= c[:message] %>"><%= c[:shortcut] %></a></li>
           <% end %>
         </ul>
       </div>
