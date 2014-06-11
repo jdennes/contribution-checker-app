@@ -45,7 +45,7 @@
 
       <div class="page-header text-center">
         <h1>
-          <span class="mega-octicon octicon-checklist"></span>
+          <a href="/"><span class="mega-octicon octicon-checklist"></span></a>
           GitHub Contribution Checker</h1>
         <p class="lead text-left">Enter your commit URL to check whether it&rsquo;s
           counted as a GitHub contribution:</p>
@@ -77,13 +77,11 @@
         counted</span> as a contribution! Check the details below:
       </p>
 
-      <table class="table table-condensed table-responsive">
-        <thead>
-          <tr class="{{#if contribution}}success{{else}}danger{{/if}}">
-            <td><h4>All of the following rules need to be true</h4></td>
-          </tr>
-        </thead>
-        <tbody>
+      <div class="panel panel-{{#if contribution}}success{{else}}danger{{/if}}">
+        <div class="panel-heading">
+          <h4>All of the following rules need to be true</h4>
+        </div>
+        <table class="table table-condensed table-responsive">
           <tr class="{{#if and_criteria.commit_in_valid_branch}}success{{else}}danger{{/if}}">
             <td><span class="glyphicon glyphicon-{{#if and_criteria.commit_in_valid_branch}}ok{{else}}remove{{/if}}"></span> Is the commit in the default or gh-pages branch? </td>
           </tr>
@@ -96,16 +94,14 @@
           <tr class="{{#if and_criteria.commit_email_linked_to_user}}success{{else}}danger{{/if}}">
             <td><span class="glyphicon glyphicon-{{#if and_criteria.commit_email_linked_to_user}}ok{{else}}remove{{/if}}"></span> Is the email used to author the commit listed in the user&rsquo;s email settings?</td>
           </tr>
-        </tbody>
-      </table>
+        </table>
+      </div>
 
-      <table class="table table-condensed">
-        <thead>
-          <tr class="{{#if contribution}}success{{else}}danger{{/if}}">
-            <td><h4> At least one of the following rules needs to be true</h4></td>
-          </tr>
-        </thead>
-        <tbody>
+      <div class="panel panel-{{#if contribution}}success{{else}}danger{{/if}}">
+        <div class="panel-heading">
+          <h4>At least one of the following rules needs to be true</h4>
+        </div>
+        <table class="table table-condensed table-responsive">
           <tr class="{{#if or_criteria.user_has_starred_repo}}success{{else}}danger{{/if}}">
             <td><span class="glyphicon glyphicon-{{#if or_criteria.user_has_starred_repo}}ok{{else}}remove{{/if}}"></span> Has the user starred the repository containing the commit?</td>
           </tr>
@@ -118,8 +114,8 @@
           <tr class="{{#if or_criteria.user_has_fork_of_repo}}success{{else}}danger{{/if}}">
             <td><span class="glyphicon glyphicon-{{#if or_criteria.user_has_fork_of_repo}}ok{{else}}remove{{/if}}"></span> Does the user own a fork of the repository containing the commit?</td>
           </tr>
-        </tbody>
-      </table>
+        </table>
+      </div>
       </script>
 
       <% if !recent_commits.empty? %>
