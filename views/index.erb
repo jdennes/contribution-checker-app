@@ -32,6 +32,9 @@
         @-moz-keyframes flash { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
         @-o-keyframes flash { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
         @keyframes flash { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
+        #recent-commits ul li span {
+          padding-right: 10px;
+        }
     </style>
   </head>
   <body>
@@ -119,7 +122,10 @@
         <p class="lead">Or, check one of your recent commits:</p>
         <ul class="list-group">
           <% for c in recent_commits %>
-          <li class="list-group-item"><a href="#" data-commit-url="<%= c[:html_url] %>" title="<%= c[:message] %>"><%= c[:shortcut] %></a></li>
+          <li class="list-group-item">
+            <span class="glyphicon glyphicon-pencil"></span>
+            <a href="#" data-commit-url="<%= c[:html_url] %>" title="<%= c[:message] %>"><%= c[:shortcut] %></a>
+          </li>
           <% end %>
         </ul>
       </div>
