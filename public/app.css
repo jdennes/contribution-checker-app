@@ -1,0 +1,47 @@
+body {
+  background-image: url('/background.png');
+  background-repeat: repeat-x;
+}
+.container {
+  max-width: 768px; padding-top: 40px;
+}
+.alert {
+  display: none;
+}
+#waiting {
+  display: none;
+}
+#results {
+  display: none;
+}
+#results-lead span {
+  padding: 2px 4px;
+}
+table td span {
+  padding-right: 12px;
+}
+.table td:first-child {
+  padding-left: 15px;
+}
+.flash {
+  color: #f90;
+  -webkit-animation: flash 1.5s infinite linear;
+  -moz-animation: flash 1.5s infinite linear;
+  -o-animation: flash 1.5s infinite linear;
+  animation: flash 1.5s infinite linear;
+}
+@-webkit-keyframes flash { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
+@-moz-keyframes flash { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
+@-o-keyframes flash { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes flash { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
+
+#recent-commits .commit-shortcut {
+  font-family: monospace;
+}
+#recent-commits .commit-icon {
+  padding-top: 5px;
+  padding-right: 15px;
+}
+button.js-check-commit {
+  margin-top: 4px;
+}
