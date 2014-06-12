@@ -22,9 +22,9 @@
           #results-lead span {
             padding: 2px 4px; }
           table td span {
-            padding-right: 40px; }
+            padding-right: 15px; }
           .table td:first-child {
-            padding-left: 40px; }
+            padding-left: 15px; }
         .flash {
           color: #f90;
           -webkit-animation: flash 1.5s infinite linear;
@@ -88,16 +88,16 @@
         </div>
         <table class="table table-condensed table-responsive">
           <tr class="{{#if and_criteria.commit_in_valid_branch}}success{{else}}danger{{/if}}">
-            <td><span class="glyphicon glyphicon-{{#if and_criteria.commit_in_valid_branch}}ok{{else}}remove{{/if}}"></span> Is the commit in the default or gh-pages branch? </td>
+            <td><span class="octicon octicon-{{#if and_criteria.commit_in_valid_branch}}check{{else}}x{{/if}}"></span> Is the commit in the default or gh-pages branch? </td>
           </tr>
           <tr class="{{#if and_criteria.commit_in_last_year}}success{{else}}danger{{/if}}">
-            <td><span class="glyphicon glyphicon-{{#if and_criteria.commit_in_last_year}}ok{{else}}remove{{/if}}"></span> Was the commit authored in the last year?</td>
+            <td><span class="octicon octicon-{{#if and_criteria.commit_in_last_year}}check{{else}}x{{/if}}"></span> Was the commit authored in the last year?</td>
           </tr>
           <tr class="{{#if and_criteria.repo_not_a_fork}}success{{else}}danger{{/if}}">
-            <td><span class="glyphicon glyphicon-{{#if and_criteria.repo_not_a_fork}}ok{{else}}remove{{/if}}"></span> Is the repository containing the commit <em>not</em> a fork?</td>
+            <td><span class="octicon octicon-{{#if and_criteria.repo_not_a_fork}}check{{else}}x{{/if}}"></span> Is the repository containing the commit <em>not</em> a fork?</td>
           </tr>
           <tr class="{{#if and_criteria.commit_email_linked_to_user}}success{{else}}danger{{/if}}">
-            <td><span class="glyphicon glyphicon-{{#if and_criteria.commit_email_linked_to_user}}ok{{else}}remove{{/if}}"></span> Is the email used to author the commit listed in the user&rsquo;s email settings?</td>
+            <td><span class="octicon octicon-{{#if and_criteria.commit_email_linked_to_user}}check{{else}}x{{/if}}"></span> Is the email used to author the commit listed in the user&rsquo;s email settings?</td>
           </tr>
         </table>
       </div>
@@ -108,16 +108,16 @@
         </div>
         <table class="table table-condensed table-responsive">
           <tr class="{{#if or_criteria.user_has_starred_repo}}success{{else}}danger{{/if}}">
-            <td><span class="glyphicon glyphicon-{{#if or_criteria.user_has_starred_repo}}ok{{else}}remove{{/if}}"></span> Has the user starred the repository containing the commit?</td>
+            <td><span class="octicon octicon-{{#if or_criteria.user_has_starred_repo}}check{{else}}x{{/if}}"></span> Has the user starred the repository containing the commit?</td>
           </tr>
           <tr class="{{#if or_criteria.user_can_push_to_repo}}success{{else}}danger{{/if}}">
-            <td><span class="glyphicon glyphicon-{{#if or_criteria.user_can_push_to_repo}}ok{{else}}remove{{/if}}"></span> Does the user have push access to the repository?</td>
+            <td><span class="octicon octicon-{{#if or_criteria.user_can_push_to_repo}}check{{else}}x{{/if}}"></span> Does the user have push access to the repository?</td>
           </tr>
           <tr class="{{#if or_criteria.user_is_repo_org_member}}success{{else}}danger{{/if}}">
-            <td><span class="glyphicon glyphicon-{{#if or_criteria.user_is_repo_org_member}}ok{{else}}remove{{/if}}"></span> Is the user a member of the organization that owns the repository?</td>
+            <td><span class="octicon octicon-{{#if or_criteria.user_is_repo_org_member}}check{{else}}x{{/if}}"></span> Is the user a member of the organization that owns the repository?</td>
           </tr>
           <tr class="{{#if or_criteria.user_has_fork_of_repo}}success{{else}}danger{{/if}}">
-            <td><span class="glyphicon glyphicon-{{#if or_criteria.user_has_fork_of_repo}}ok{{else}}remove{{/if}}"></span> Does the user own a fork of the repository containing the commit?</td>
+            <td><span class="octicon octicon-{{#if or_criteria.user_has_fork_of_repo}}check{{else}}x{{/if}}"></span> Does the user own a fork of the repository containing the commit?</td>
           </tr>
         </table>
       </div>
