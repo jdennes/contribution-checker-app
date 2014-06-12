@@ -14,12 +14,13 @@
         check();
       }
     });
-    $("#recent-commits ul li.commit a").click(function(e) {
+    $(".js-check-commit").click(function(e) {
+      $(".js-check-commit").attr("disabled", "");
       $(".form input").val($(this).attr("data-commit-url"));
       check();
       return false;
     });
-    $("#show-more-commits").click(function(e) {
+    $(".js-show-more-commits").click(function(e) {
       $("#recent-commits ul li.hide").removeClass("hide");
       $(this).closest("li").remove();
       return false;
@@ -49,6 +50,7 @@
       complete: function() {
         $("#waiting").hide();
         $("input").removeAttr("disabled");
+        $(".js-check-commit").removeAttr("disabled");
       }
     });
   }

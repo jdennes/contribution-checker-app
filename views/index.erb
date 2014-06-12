@@ -22,7 +22,7 @@
           #results-lead span {
             padding: 2px 4px; }
           table td span {
-            padding-right: 15px; }
+            padding-right: 12px; }
           .table td:first-child {
             padding-left: 15px; }
         .flash {
@@ -35,11 +35,16 @@
         @-moz-keyframes flash { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
         @-o-keyframes flash { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
         @keyframes flash { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
-        #recent-commits ul li span {
-          padding-right: 10px;
-        }
-        #recent-commits ul li.commit a {
+
+        #recent-commits .commit-shortcut {
           font-family: monospace;
+        }
+        #recent-commits .commit-icon {
+          padding-top: 5px;
+          padding-right: 15px;
+        }
+        button.js-check-commit {
+          margin-top: 4px;
         }
     </style>
   </head>
@@ -128,19 +133,27 @@
         <p class="lead">Or, check one of your recent commits:</p>
         <ul class="list-group">
           <% for c in recent_commits.take(5) %>
-          <li class="list-group-item commit">
-            <span class="octicon octicon-git-commit"></span>
-            <a href="#" data-commit-url="<%= c[:html_url] %>" title="<%= c[:message] %>"><%= c[:shortcut] %></a>
+          <li class="list-group-item">
+            <span class="mega-octicon octicon-git-commit commit-icon pull-left"></span>
+            <button type="button" class="pull-right btn btn-default js-check-commit" data-commit-url="<%= c[:html_url] %>">Check</button>
+            <h4 class="list-group-item-heading"><%= c[:message] %></h4>
+            <p class="list-group-item-text commit-shortcut">
+              <a href="<%= c[:html_url] %>" title="<%= c[:message] %>" target="_blank"><%= c[:shortcut] %></a>
+            </p>
           </li>
           <% end %>
           <% for c in recent_commits.drop(5) %>
-          <li class="list-group-item commit hide">
-            <span class="octicon octicon-git-commit"></span>
-            <a href="#" data-commit-url="<%= c[:html_url] %>" title="<%= c[:message] %>"><%= c[:shortcut] %></a>
+          <li class="list-group-item hide">
+            <span class="mega-octicon octicon-git-commit commit-icon pull-left"></span>
+            <button type="button" class="pull-right btn btn-default js-check-commit" data-commit-url="<%= c[:html_url] %>">Check</button>
+            <h4 class="list-group-item-heading"><%= c[:message] %></h4>
+            <p class="list-group-item-text commit-shortcut">
+              <a href="<%= c[:html_url] %>" title="<%= c[:message] %>" target="_blank"><%= c[:shortcut] %></a>
+            </p>
           </li>
           <% end %>
           <li class="list-group-item">
-            <a id="show-more-commits" href="#">Show more commits&#8230;</a>
+            <a class="js-show-more-commits" href="#">Show more commits&#8230;</a>
           </li>
         </ul>
       </div>
