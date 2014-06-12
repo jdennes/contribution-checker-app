@@ -29,7 +29,7 @@ def recent_commits
     end
     commits.concat e[:payload][:commits]
   end
-  commits.take 5
+  commits.take 15
 end
 
 get "/" do
