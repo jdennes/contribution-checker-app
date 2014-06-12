@@ -16,8 +16,8 @@
         <h1>
           <a href="/"><span class="mega-octicon octicon-checklist"></span></a>
           GitHub Contribution Checker</h1>
-        <p class="lead text-left">Enter your commit URL to check whether it&rsquo;s
-          counted as a GitHub
+        <p class="lead text-left">Enter a public commit URL to check whether
+          it&rsquo;s counted as a
           <a href="https://help.github.com/articles/why-are-my-contributions-not-showing-up-on-my-profile"
             target="_blank">contribution</a>:</p>
       </div>
@@ -91,7 +91,7 @@
 
       <% if !recent_commits.empty? %>
       <div id="recent-commits">
-        <p class="lead">Or, check one of your recent commits:</p>
+        <p class="lead">Or, check one of your recent public commits:</p>
         <ul class="list-group">
           <% for c in recent_commits.take(5) %>
           <li class="list-group-item">
