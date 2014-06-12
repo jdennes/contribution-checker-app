@@ -152,9 +152,11 @@
             </p>
           </li>
           <% end %>
+          <% if recent_commits.length > 5 %>
           <li class="list-group-item">
             <a class="js-show-more-commits" href="#">Show more commits&#8230;</a>
           </li>
+          <% end %>
         </ul>
       </div>
       <% end %>
