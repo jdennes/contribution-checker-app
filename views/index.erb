@@ -94,24 +94,10 @@
         <p class="lead">Or, check one of your recent public commits:</p>
         <ul class="list-group">
           <% for c in recent_commits.take(5) %>
-          <li class="list-group-item">
-            <span class="mega-octicon octicon-git-commit commit-icon pull-left"></span>
-            <button type="button" class="pull-right btn btn-default js-check-commit" data-commit-url="<%= c[:html_url] %>">Check</button>
-            <h4 class="list-group-item-heading"><%= c[:message] %></h4>
-            <p class="list-group-item-text commit-shortcut">
-              <a href="<%= c[:html_url] %>" title="<%= c[:message] %>" target="_blank"><%= c[:shortcut] %></a>
-            </p>
-          </li>
+            <%= erb :commit, :locals => { :commit => c, :hidden => false } %>
           <% end %>
           <% for c in recent_commits.drop(5) %>
-          <li class="list-group-item hide">
-            <span class="mega-octicon octicon-git-commit commit-icon pull-left"></span>
-            <button type="button" class="pull-right btn btn-default js-check-commit" data-commit-url="<%= c[:html_url] %>">Check</button>
-            <h4 class="list-group-item-heading"><%= c[:message] %></h4>
-            <p class="list-group-item-text commit-shortcut">
-              <a href="<%= c[:html_url] %>" title="<%= c[:message] %>" target="_blank"><%= c[:shortcut] %></a>
-            </p>
-          </li>
+            <%= erb :commit, :locals => { :commit => c, :hidden => true } %>
           <% end %>
           <% if recent_commits.length > 5 %>
           <li class="list-group-item">
