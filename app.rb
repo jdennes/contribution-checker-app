@@ -1,5 +1,4 @@
 require "sinatra"
-require "json"
 require "sinatra/json"
 require "contribution-checker"
 require "octokit"
