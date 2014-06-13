@@ -1,5 +1,4 @@
 require "sinatra"
-require "rest_client"
 require "json"
 require "sinatra/json"
 require "contribution-checker"
