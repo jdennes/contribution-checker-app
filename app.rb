@@ -8,14 +8,31 @@ CLIENT_SECRET = ENV["GITHUB_CLIENT_SECRET"]
 
 use Rack::Session::Pool, :cookie_only => false
 
-def authenticated?
-  session[:access_token]
-end
-
+# Ask the user to authorise the app.
 def authenticate!
   redirect "https://github.com/login/oauth/authorize?scope=user:email&client_id=#{CLIENT_ID}"
 end
 
+# Check whether the user has an access token.
+def authenticated?
+  session[:access_token]
+end
+
+# Check whether the user's access token is valid.
+def check_access_token
+  @access_token = session[:access_token]
+
+  begin
+    @client = Octokit::Client.new :access_token => @access_token
+    @user = @client.user
+  rescue => e
+    # The token has been revoked, so invalidate the token in the session.
+    session[:access_token] = nil
+    authenticate!
+  end
+end
+
+# Get the user's recent commits from their public activity feed.
 def recent_commits
   public_events = @client.user_public_events @user[:login]
   public_events.select! { |e| e[:type] == "PushEvent" }
@@ -30,43 +47,18 @@ def recent_commits
   commits.take 15
 end
 
+# Serve the main page.
 get "/" do
-  if !authenticated?
-    authenticate!
-  else
-    @access_token = session[:access_token]
-
-    begin
-      @client = Octokit::Client.new :access_token => @access_token
-      @user = @client.user
-    rescue => e
-      # Token has been revoked. Invalidate the token in the session.
-      session[:access_token] = nil
-      return authenticate!
-    end
-    erb :index, :locals => { :recent_commits => recent_commits }
-  end
+  authenticate! if !authenticated?
+  check_access_token
+  erb :index, :locals => { :recent_commits => recent_commits }
 end
 
+# Respond to requests to check a commit. The commit URL is included in the
+# url param.
 post "/" do
-  if !authenticated?
-    authenticate!
-  else
-    @access_token = session[:access_token]
-
-    begin
-      @client = Octokit::Client.new :access_token => @access_token
-      @user = @client.user
-    rescue => e
-      # Token has been revoked. Invalidate the token in the session.
-      session[:access_token] = nil
-      return authenticate!
-    end
-  end
-  check
-end
-
-def check
+  authenticate! if !authenticated?
+  check_access_token
   checker = ContributionChecker::Checker.new \
     :access_token => @access_token,
     :commit_url => params[:url]
@@ -80,6 +72,7 @@ def check
   json result
 end
 
+# Handle the redirect from GitHub after someone authorises the app.
 get "/callback" do
   session_code = request.env["rack.request.query_hash"]["code"]
   result = Octokit.exchange_code_for_token \
