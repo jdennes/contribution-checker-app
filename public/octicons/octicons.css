@@ -20,7 +20,7 @@
   display: inline-block;
   text-decoration: none;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale
+  -moz-osx-font-smoothing: grayscale;
 }
 .mega-octicon {
   font: normal normal 32px octicons;
@@ -28,7 +28,7 @@
   display: inline-block;
   text-decoration: none;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .octicon-alert:before { content: '\f02d'} /*  */
