@@ -9,6 +9,8 @@ group :development do
   gem "bundler", "~> 1.6"
   gem "rake"
   gem "rspec"
+  gem "simplecov"
+  gem "coveralls"
 end
 
 ruby "2.0.0"
