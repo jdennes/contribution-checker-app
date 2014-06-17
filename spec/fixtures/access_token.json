@@ -1,0 +1,5 @@
+{
+  "access_token": "myaccesstoken",
+  "scope": "user:email",
+  "token_type": "bearer"
+}
