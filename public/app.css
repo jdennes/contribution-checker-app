@@ -17,8 +17,11 @@ body {
 #results-lead span {
   padding: 2px 4px;
 }
-table td span {
-  padding-right: 12px;
+#results .octicon {
+  width: 12px;
+}
+#results table td span {
+  margin-right: 12px;
 }
 .table td:first-child {
   padding-left: 15px;
