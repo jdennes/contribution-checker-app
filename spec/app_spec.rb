@@ -11,7 +11,6 @@ describe "The Contribution Checker app" do
   describe "GET /" do
 
     context "when the app is not authorised" do
-
       it "redirects to request authorisation" do
         get "/"
 
@@ -19,7 +18,23 @@ describe "The Contribution Checker app" do
         expect(last_response.headers["Location"]).to \
           eq("https://github.com/login/oauth/authorize?scope=user:email&client_id=myclientid")
       end
+    end
 
+    context "when the app is authorised but the token is invalid" do
+
+      before do
+        stub_request(:get, "https://api.github.com/user").
+          to_return(:status => 401)
+      end
+
+      it "checks token and redirects to request authorisation" do
+        get "/", {}, { "rack.session" => { :access_token => "x" * 40 } }
+
+        expect(last_request.env["rack.session"][:access_token]).to eq(nil)
+        expect(last_response.status).to eq(302)
+        expect(last_response.headers["Location"]).to \
+          eq("https://github.com/login/oauth/authorize?scope=user:email&client_id=myclientid")
+      end
     end
 
   end
