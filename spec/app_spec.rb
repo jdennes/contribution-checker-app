@@ -51,6 +51,7 @@ describe "The Contribution Checker app" do
 
         expect(last_request.env["rack.session"][:access_token]).to eq(access_token)
         expect(last_response.status).to eq(200)
+        expect(last_response.body).to include("recent public commits")
       end
     end
 
