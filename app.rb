@@ -66,6 +66,17 @@ post "/" do
   begin
     result = checker.check
     result[:commit_url] = params[:url]
+    result[:and_criteria_met] =
+      result[:and_criteria][:commit_in_valid_branch] &&
+      result[:and_criteria][:commit_in_last_year] &&
+      result[:and_criteria][:repo_not_a_fork] &&
+      result[:and_criteria][:commit_email_linked_to_user]
+    result[:or_criteria_met] =
+      result[:or_criteria][:user_has_starred_repo] ||
+      result[:or_criteria][:user_can_push_to_repo] ||
+      result[:or_criteria][:user_is_repo_org_member] ||
+      result[:or_criteria][:user_has_fork_of_repo]
+
   rescue ContributionChecker::InvalidCommitUrlError => err
     return json :error_message => err
   end
