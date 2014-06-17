@@ -73,12 +73,56 @@ describe "The Contribution Checker app" do
       end
 
       it "returns a json response containing an error message" do
-        post "/", { :url => "not a url" }, { "rack.session" => { :access_token => access_token } }
+        post "/", { :url => "not a url" },
+          { "rack.session" => { :access_token => access_token } }
 
         expect(last_request.env["rack.session"][:access_token]).to eq(access_token)
         expect(last_response.status).to eq(200)
         expect(last_response.headers["Content-Type"]).to eq("application/json")
         expect(last_response.body).to include("error_message")
+      end
+    end
+
+    context "when a commit is successfully checked" do
+      let(:access_token) { "myaccesstoken" }
+      let(:commit_url) { "https://github.com/git/git-scm.com/commit/f6b5cb6" }
+      let(:check_result) { {
+        :contribution => true,
+        :and_criteria => {
+          :commit_in_valid_branch      => true,
+          :commit_in_last_year         => true,
+          :repo_not_a_fork             => true,
+          :commit_email_linked_to_user => true
+        },
+        :or_criteria => {
+          :user_has_starred_repo   => false,
+          :user_can_push_to_repo   => false,
+          :user_is_repo_org_member => true,
+          :user_has_fork_of_repo   => false
+        }
+      } }
+
+      before do
+        expect_any_instance_of(ContributionChecker::Checker).to receive(:check).
+          and_return(check_result)
+
+        stub_request(:get, "https://api.github.com/user").
+          to_return(json_response("user.json"))
+        stub_request(:get, "https://api.github.com/users/jdennes/events/public").
+          to_return(json_response("public_events.json"))
+      end
+
+      it "returns a json response containing an error message" do
+        post "/", { :url => commit_url },
+          { "rack.session" => { :access_token => access_token } }
+
+        expect(last_request.env["rack.session"][:access_token]).to eq(access_token)
+        expect(last_response.status).to eq(200)
+        expect(last_response.headers["Content-Type"]).to eq("application/json")
+        expect(last_response.body).to include("\"contribution\":true")
+        expect(last_response.body).to include("\"commit_url\":\"#{commit_url}\"")
+        expect(last_response.body).to include("\"and_criteria_met\":true")
+        expect(last_response.body).to include("\"or_criteria_met\":true")
       end
     end
 
