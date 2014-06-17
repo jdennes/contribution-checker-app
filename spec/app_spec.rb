@@ -15,7 +15,7 @@ describe "The Contribution Checker app" do
         get "/"
 
         expect(last_response.status).to eq(302)
-        expect(last_response.headers["Location"]).to \
+        expect(last_response.location).to \
           eq("https://github.com/login/oauth/authorize?scope=user:email&client_id=myclientid")
       end
     end
@@ -31,7 +31,7 @@ describe "The Contribution Checker app" do
 
         expect(last_request.env["rack.session"][:access_token]).to eq(nil)
         expect(last_response.status).to eq(302)
-        expect(last_response.headers["Location"]).to \
+        expect(last_response.location).to \
           eq("https://github.com/login/oauth/authorize?scope=user:email&client_id=myclientid")
       end
     end
