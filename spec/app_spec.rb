@@ -57,6 +57,33 @@ describe "The Contribution Checker app" do
 
   end
 
+  describe "POST /" do
+
+    context "when an invalid commit url is provided" do
+      let(:access_token) { "myaccesstoken" }
+
+      before do
+        expect_any_instance_of(ContributionChecker::Checker).to receive(:check).
+          and_raise(ContributionChecker::InvalidCommitUrlError)
+
+        stub_request(:get, "https://api.github.com/user").
+          to_return(json_response("user.json"))
+        stub_request(:get, "https://api.github.com/users/jdennes/events/public").
+          to_return(json_response("public_events.json"))
+      end
+
+      it "returns a json response containing an error message" do
+        post "/", { :url => "not a url" }, { "rack.session" => { :access_token => access_token } }
+
+        expect(last_request.env["rack.session"][:access_token]).to eq(access_token)
+        expect(last_response.status).to eq(200)
+        expect(last_response.headers["Content-Type"]).to eq("application/json")
+        expect(last_response.body).to include("error_message")
+      end
+    end
+
+  end
+
   describe "GET /callback" do
 
     let(:code) { "mytempcode" }
