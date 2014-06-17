@@ -28,14 +28,14 @@ def fixture_path
 end
 
 def fixture(file)
-  File.new(fixture_path + '/' + file)
+  File.new "#{fixture_path}/#{file}"
 end
 
 def json_response(file)
   {
     :body => fixture(file),
     :headers => {
-      :content_type => 'application/json; charset=utf-8'
+      :content_type => "application/json; charset=utf-8"
     }
   }
 end
