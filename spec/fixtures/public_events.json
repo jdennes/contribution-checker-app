@@ -214,7 +214,7 @@
         {
           "sha": "73233eecafc885a55f7b3d6e12654fb53f53ca42",
           "author": {
-            "email": "jdennes@gmail.com",
+            "email": "jdennes@example.com",
             "name": "James Dennes"
           },
           "message": "Truncate longish commit messages",
@@ -275,7 +275,7 @@
         {
           "sha": "e1867bf7c35d8b486f146a7d06d62b3f5cb1069a",
           "author": {
-            "email": "jdennes@gmail.com",
+            "email": "jdennes@example.com",
             "name": "James Dennes"
           },
           "message": "Add and_criteria_met and or_criteria_met to the check result\n\nAllows the use of nice logic in the handlebars template:\n\n```\n{{#if and_criteria_met}}success{{else}}danger{{/if}}\n```",
@@ -361,7 +361,7 @@
         {
           "sha": "7a333365b0755bafc089345748cd152b71492cd0",
           "author": {
-            "email": "jdennes@gmail.com",
+            "email": "jdennes@example.com",
             "name": "James Dennes"
           },
           "message": "Improve results copy",
@@ -371,7 +371,7 @@
         {
           "sha": "6a87bd8cedb7c3aa5be46a26ea8f3316cb73e0cd",
           "author": {
-            "email": "jdennes@gmail.com",
+            "email": "jdennes@example.com",
             "name": "James Dennes"
           },
           "message": "Fix results spacing and layout",
@@ -381,7 +381,7 @@
         {
           "sha": "f4c06af931e8cddf8c4db90c93d99260ffc835e2",
           "author": {
-            "email": "jdennes@gmail.com",
+            "email": "jdennes@example.com",
             "name": "James Dennes"
           },
           "message": "Pull in .travis.yml from the add-specs branch to suppress CI errors",
@@ -391,7 +391,7 @@
         {
           "sha": "004c7656cda42f108063c22196927074e490db93",
           "author": {
-            "email": "jdennes@gmail.com",
+            "email": "jdennes@example.com",
             "name": "James Dennes"
           },
           "message": "Merge branch 'master' into better-results-copy",
@@ -401,7 +401,7 @@
         {
           "sha": "b9109f1ee2dd32e9fa6b8a67960d775c952acaa5",
           "author": {
-            "email": "jdennes@gmail.com",
+            "email": "jdennes@example.com",
             "name": "James Dennes"
           },
           "message": "Clean up merge",
@@ -411,7 +411,7 @@
         {
           "sha": "deaa4c00a2e3a8a29c91f247039c392e7d44b641",
           "author": {
-            "email": "jdennes@gmail.com",
+            "email": "jdennes@example.com",
             "name": "James Dennes"
           },
           "message": "Merge pull request #5 from jdennes/better-results-copy\n\nBetter results copy",
@@ -834,7 +834,7 @@
         {
           "sha": "e5dc946a1c7340e3821b76eaf15914ae7f634490",
           "author": {
-            "email": "jdennes@gmail.com",
+            "email": "jdennes@example.com",
             "name": "James Dennes"
           },
           "message": "Initial spec setup",
@@ -844,7 +844,7 @@
         {
           "sha": "b382a2651c4a7437de526c7b3f25c1e58bd4d079",
           "author": {
-            "email": "jdennes@gmail.com",
+            "email": "jdennes@example.com",
             "name": "James Dennes"
           },
           "message": "Check coverage",
@@ -854,7 +854,7 @@
         {
           "sha": "bbd8e7aa31fc1d3db8e210f33f7aea6692fcf929",
           "author": {
-            "email": "jdennes@gmail.com",
+            "email": "jdennes@example.com",
             "name": "James Dennes"
           },
           "message": "Specify Ruby 2.0.0 when testing",
@@ -864,7 +864,7 @@
         {
           "sha": "5a19c1ff4987414ff8daf6353d6b61dd6f61e1ff",
           "author": {
-            "email": "jdennes@gmail.com",
+            "email": "jdennes@example.com",
             "name": "James Dennes"
           },
           "message": "Merge branch 'add-specs'",
@@ -874,7 +874,7 @@
         {
           "sha": "004c7656cda42f108063c22196927074e490db93",
           "author": {
-            "email": "jdennes@gmail.com",
+            "email": "jdennes@example.com",
             "name": "James Dennes"
           },
           "message": "Merge branch 'master' into better-results-copy",
@@ -884,7 +884,7 @@
         {
           "sha": "b9109f1ee2dd32e9fa6b8a67960d775c952acaa5",
           "author": {
-            "email": "jdennes@gmail.com",
+            "email": "jdennes@example.com",
             "name": "James Dennes"
           },
           "message": "Clean up merge",
@@ -945,7 +945,7 @@
         {
           "sha": "e5dc946a1c7340e3821b76eaf15914ae7f634490",
           "author": {
-            "email": "jdennes@gmail.com",
+            "email": "jdennes@example.com",
             "name": "James Dennes"
           },
           "message": "Initial spec setup",
@@ -955,7 +955,7 @@
         {
           "sha": "b382a2651c4a7437de526c7b3f25c1e58bd4d079",
           "author": {
-            "email": "jdennes@gmail.com",
+            "email": "jdennes@example.com",
             "name": "James Dennes"
           },
           "message": "Check coverage",
@@ -965,7 +965,7 @@
         {
           "sha": "bbd8e7aa31fc1d3db8e210f33f7aea6692fcf929",
           "author": {
-            "email": "jdennes@gmail.com",
+            "email": "jdennes@example.com",
             "name": "James Dennes"
           },
           "message": "Specify Ruby 2.0.0 when testing",
@@ -975,7 +975,7 @@
         {
           "sha": "5a19c1ff4987414ff8daf6353d6b61dd6f61e1ff",
           "author": {
-            "email": "jdennes@gmail.com",
+            "email": "jdennes@example.com",
             "name": "James Dennes"
           },
           "message": "Merge branch 'add-specs'",
@@ -1013,7 +1013,7 @@
         {
           "sha": "f4c06af931e8cddf8c4db90c93d99260ffc835e2",
           "author": {
-            "email": "jdennes@gmail.com",
+            "email": "jdennes@example.com",
             "name": "James Dennes"
           },
           "message": "Pull in .travis.yml from the add-specs branch to suppress CI errors",
@@ -1757,7 +1757,7 @@
         {
           "sha": "53214820e5618923854965230664a613a1fd45c3",
           "author": {
-            "email": "jdennes@gmail.com",
+            "email": "jdennes@example.com",
             "name": "James Dennes"
           },
           "message": "Update Octicons",
@@ -1795,7 +1795,7 @@
         {
           "sha": "bbd8e7aa31fc1d3db8e210f33f7aea6692fcf929",
           "author": {
-            "email": "jdennes@gmail.com",
+            "email": "jdennes@example.com",
             "name": "James Dennes"
           },
           "message": "Specify Ruby 2.0.0 when testing",
@@ -1833,7 +1833,7 @@
         {
           "sha": "b382a2651c4a7437de526c7b3f25c1e58bd4d079",
           "author": {
-            "email": "jdennes@gmail.com",
+            "email": "jdennes@example.com",
             "name": "James Dennes"
           },
           "message": "Check coverage",
@@ -1896,7 +1896,7 @@
         {
           "sha": "ce94193695bcf712bba4a730225ac7e6c49185c1",
           "author": {
-            "email": "jdennes@gmail.com",
+            "email": "jdennes@example.com",
             "name": "James Dennes"
           },
           "message": "Add transparency",
@@ -1957,7 +1957,7 @@
         {
           "sha": "e2bf8f913e7afeba441277c464a18269b3e239af",
           "author": {
-            "email": "jdennes@gmail.com",
+            "email": "jdennes@example.com",
             "name": "James Dennes"
           },
           "message": "Refactor access token check",
@@ -1967,7 +1967,7 @@
         {
           "sha": "158c36f4b5056663967ac763862e0487ddbe346c",
           "author": {
-            "email": "jdennes@gmail.com",
+            "email": "jdennes@example.com",
             "name": "James Dennes"
           },
           "message": "Merge pull request #4 from jdennes/refactor-access-token-check\n\nRefactor access token check",
