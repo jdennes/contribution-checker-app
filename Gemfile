@@ -9,6 +9,7 @@ group :development do
   gem "bundler", "~> 1.6"
   gem "rake"
   gem "rspec"
+  gem "webmock"
   gem "simplecov"
   gem "coveralls"
 end
