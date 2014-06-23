@@ -17,14 +17,9 @@ body {
 #results-lead span {
   padding: 2px 4px;
 }
-#results .octicon {
-  width: 12px;
-}
-#results table td span {
-  margin-right: 12px;
-}
 .table td:first-child {
   padding-left: 15px;
+  width: 36px;
 }
 .flash {
   color: #f90;
