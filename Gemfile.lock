@@ -20,7 +20,7 @@ GEM
     mime-types (2.3)
     multi_json (1.10.1)
     multipart-post (2.0.0)
-    octokit (3.1.2)
+    octokit (3.2.0)
       sawyer (~> 0.5.3)
     rack (1.5.2)
     rack-protection (1.5.3)
