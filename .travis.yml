@@ -1,3 +1,9 @@
 language: ruby
 rvm:
-  - 2.0.0
+- 2.0.0
+deploy:
+  provider: heroku
+  api_key:
+    secure: fl9mdZJFd/9jRgmQCSc5lq3LkaeG6x3mdXVnw2TLmshilllCYy1XndD8FzFGZQoOsnsmOLO6/qPODOwlWfQk33u3ne5DWDrOkcKM8vyV4WnP/G5o3LfLLhIS4tzYAyVOi/CM+E/iwn5ygFBLqtrBUMX9rpZpbj3atMba1kcuWx0=
+  app: contribution-checker
+  on: master
