@@ -149,4 +149,14 @@ describe "The Contribution Checker app" do
 
   end
 
+  describe "GET /ping" do
+
+    it "redirects to request authorisation" do
+      get "/ping"
+
+      expect(last_response.status).to eq(200)
+      expect(last_response.body).to eq("pong")
+    end
+  end
+
 end

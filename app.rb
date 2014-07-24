@@ -95,3 +95,7 @@ get "/callback" do
   session[:access_token] = result.access_token
   redirect "/"
 end
+
+get "/ping" do
+  "pong"
+end
