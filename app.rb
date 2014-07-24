@@ -8,6 +8,10 @@ CLIENT_SECRET = ENV["GITHUB_CLIENT_SECRET"]
 
 use Rack::Session::Pool, :cookie_only => false
 
+configure do
+  require "newrelic_rpm" if production?
+end
+
 # Ask the user to authorise the app.
 def authenticate!
   redirect "https://github.com/login/oauth/authorize?scope=user:email&client_id=#{CLIENT_ID}"
