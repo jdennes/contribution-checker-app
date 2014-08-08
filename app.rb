@@ -96,8 +96,8 @@ get "/callback" do
   redirect "/"
 end
 
-get "/about" do
-  erb :about
+get "/how" do
+  erb :how
 end
 
 get "/ping" do

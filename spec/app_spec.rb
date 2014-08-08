@@ -142,9 +142,9 @@ describe "The Contribution Checker app" do
     end
   end
 
-  describe "GET /about" do
-    it "shows the about page" do
-      get "/about"
+  describe "GET /how" do
+    it "shows the 'How does this work?' page" do
+      get "/how"
 
       expect(last_response.status).to eq(200)
       expect(last_response.headers["Content-Type"]).to eq("text/html;charset=utf-8")
