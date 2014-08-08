@@ -149,6 +149,16 @@ describe "The Contribution Checker app" do
 
   end
 
+  describe "GET /about" do
+
+    it "shows the about page" do
+      get "/about"
+
+      expect(last_response.status).to eq(200)
+      expect(last_response.headers["Content-Type"]).to eq("text/html;charset=utf-8")
+    end
+  end
+
   describe "GET /ping" do
 
     it "redirects to request authorisation" do
