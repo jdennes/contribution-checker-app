@@ -3,13 +3,11 @@ require "helper"
 set :environment, :test
 
 describe "The Contribution Checker app" do
-
   let(:app) { Sinatra::Application }
   let(:client_id) { ENV["GITHUB_CLIENT_ID"] }
   let(:client_secret) { ENV["GITHUB_CLIENT_SECRET"] }
 
   describe "GET /" do
-
     context "when the app is not authorised" do
       it "redirects to request authorisation" do
         get "/"
@@ -54,11 +52,9 @@ describe "The Contribution Checker app" do
         expect(last_response.body).to include("recent public commits")
       end
     end
-
   end
 
   describe "POST /" do
-
     context "when an invalid commit url is provided" do
       let(:access_token) { "myaccesstoken" }
 
@@ -125,11 +121,9 @@ describe "The Contribution Checker app" do
         expect(last_response.body).to include("\"or_criteria_met\":true")
       end
     end
-
   end
 
   describe "GET /callback" do
-
     let(:code) { "mytempcode" }
     let(:access_token) { "myaccesstoken" }
 
@@ -146,11 +140,9 @@ describe "The Contribution Checker app" do
       expect(last_request.env["rack.session"][:access_token]).to eq(access_token)
       expect(last_response.status).to eq(302)
     end
-
   end
 
   describe "GET /about" do
-
     it "shows the about page" do
       get "/about"
 
@@ -160,7 +152,6 @@ describe "The Contribution Checker app" do
   end
 
   describe "GET /ping" do
-
     it "redirects to request authorisation" do
       get "/ping"
 
@@ -168,5 +159,4 @@ describe "The Contribution Checker app" do
       expect(last_response.body).to eq("pong")
     end
   end
-
 end
