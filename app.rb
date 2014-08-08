@@ -96,6 +96,10 @@ get "/callback" do
   redirect "/"
 end
 
+get "/about" do
+  erb :about
+end
+
 get "/ping" do
   "pong"
 end
