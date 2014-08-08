@@ -12,7 +12,21 @@
   scopes</a> are requested when you are prompted to authorise the application:
 </p>
 
-<ul>
-  <li>user:email</li>
-  <li>read:org</li>
-</ul>
+<table class="table">
+  <tr>
+    <th>Scope</th>
+    <th>Reason Requested</th>
+  </tr>
+  <tr>
+    <td><code>user:email</code></td>
+    <td>Read-only access to the email addresses you have added to your GitHub
+      account is required when checking whether the email address used to author
+      a commit has been added to your GitHub account.</td>
+  </tr>
+  <tr>
+    <td><code>read:org</code></td>
+    <td>Read-only access to your GitHub organization membership is required when
+      checking whether you are a member of the organization which owns a
+      repository in which you have authored a commit.</td>
+  </tr>
+</table>
