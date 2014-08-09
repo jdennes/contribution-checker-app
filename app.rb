@@ -6,7 +6,8 @@ require "octokit"
 CLIENT_ID = ENV["GITHUB_CLIENT_ID"]
 CLIENT_SECRET = ENV["GITHUB_CLIENT_SECRET"]
 
-use Rack::Session::Pool, :cookie_only => false
+enable :sessions
+set :session_secret, ENV["SESSION_SECRET"]
 
 configure do
   require "newrelic_rpm" if production?
