@@ -63,7 +63,8 @@ get "/" do
     erb :how, :locals => { :authenticated => authenticated? }
   else
     check_access_token
-    erb :index, :locals => { :recent_commits => recent_commits }
+    erb :index, :locals => {
+      :authenticated => authenticated?, :recent_commits => recent_commits }
   end
 end
 
