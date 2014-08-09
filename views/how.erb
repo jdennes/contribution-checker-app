@@ -5,7 +5,7 @@
   check the
   <a href="https://help.github.com/articles/why-are-my-contributions-not-showing-up-on-my-profile#commits" target="_blank">documented
     criteria</a> used for counting a commit as a contribution. It is currently
-    only possible to check commits authored in public repositories.</p>
+    only possible to check commits authored in <em>public</em> repositories.</p>
 
 <p>The following
   <a href="https://developer.github.com/v3/oauth/#scopes" target="_blank">OAuth
@@ -30,3 +30,9 @@
       repository in which you have authored a commit.</td>
   </tr>
 </table>
+
+<% if !authenticated %>
+<div id="get-started" class="text-center">
+  <a href="/auth" class="btn btn-primary btn-lg">Get started</a>
+</div>
+<% end%>

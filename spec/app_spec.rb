@@ -7,14 +7,23 @@ describe "The Contribution Checker app" do
   let(:client_id) { ENV["GITHUB_CLIENT_ID"] }
   let(:client_secret) { ENV["GITHUB_CLIENT_SECRET"] }
 
+  describe "GET /auth" do
+    it "redirects to request authorisation" do
+      get "/auth"
+
+      expect(last_response.status).to eq(302)
+      expect(last_response.location).to \
+        eq("https://github.com/login/oauth/authorize?scope=user:email,read:org&client_id=myclientid")
+    end
+  end
+
   describe "GET /" do
     context "when the app is not authorised" do
-      it "redirects to request authorisation" do
+      it "shows the 'How does this work?' page" do
         get "/"
 
-        expect(last_response.status).to eq(302)
-        expect(last_response.location).to \
-          eq("https://github.com/login/oauth/authorize?scope=user:email,read:org&client_id=myclientid")
+        expect(last_response.status).to eq(200)
+        expect(last_response.body).to include("How does this work?")
       end
     end
 

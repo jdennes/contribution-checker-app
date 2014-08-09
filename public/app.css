@@ -50,3 +50,9 @@ body {
 button.js-check-commit {
   margin-top: 4px;
 }
+#get-started {
+  margin-bottom: 30px;
+}
+footer {
+  padding-bottom: 20px;
+}

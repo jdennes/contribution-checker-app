@@ -51,11 +51,19 @@ def recent_commits
   commits.take 15
 end
 
+# Wrapper route for redirecting the user to authorise the app.
+get "/auth" do
+  authenticate!
+end
+
 # Serve the main page.
 get "/" do
-  authenticate! if !authenticated?
-  check_access_token
-  erb :index, :locals => { :recent_commits => recent_commits }
+  if !authenticated?
+    erb :how, :locals => { :authenticated => authenticated? }
+  else
+    check_access_token
+    erb :index, :locals => { :recent_commits => recent_commits }
+  end
 end
 
 # Respond to requests to check a commit. The commit URL is included in the
@@ -96,10 +104,12 @@ get "/callback" do
   redirect "/"
 end
 
+# Show the 'How does this work?' page.
 get "/how" do
-  erb :how
+  erb :how, :locals => { :authenticated => authenticated? }
 end
 
+# Ping endpoing for uptime check.
 get "/ping" do
   "pong"
 end
