@@ -3,8 +3,12 @@
   var renderResults, renderError;
 
   function setupRenderers() {
-    renderError = Handlebars.compile($("#err-template").html());
-    renderResults = Handlebars.compile($("#results-template").html());
+    if ($("#err-template").length) {
+      renderError = Handlebars.compile($("#err-template").html());
+    }
+    if ($("#err-template").length) {
+      renderResults = Handlebars.compile($("#results-template").html());
+    }
   }
 
   function setupEventHandlers() {

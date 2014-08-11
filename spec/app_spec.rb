@@ -3,20 +3,27 @@ require "helper"
 set :environment, :test
 
 describe "The Contribution Checker app" do
-
   let(:app) { Sinatra::Application }
   let(:client_id) { ENV["GITHUB_CLIENT_ID"] }
   let(:client_secret) { ENV["GITHUB_CLIENT_SECRET"] }
 
-  describe "GET /" do
+  describe "GET /auth" do
+    it "redirects to request authorisation" do
+      get "/auth"
 
+      expect(last_response.status).to eq(302)
+      expect(last_response.location).to \
+        eq("https://github.com/login/oauth/authorize?scope=user:email,read:org&client_id=myclientid")
+    end
+  end
+
+  describe "GET /" do
     context "when the app is not authorised" do
-      it "redirects to request authorisation" do
+      it "shows the 'How does this work?' page" do
         get "/"
 
-        expect(last_response.status).to eq(302)
-        expect(last_response.location).to \
-          eq("https://github.com/login/oauth/authorize?scope=user:email,read:org&client_id=myclientid")
+        expect(last_response.status).to eq(200)
+        expect(last_response.body).to include("How does this work?")
       end
     end
 
@@ -54,11 +61,9 @@ describe "The Contribution Checker app" do
         expect(last_response.body).to include("recent public commits")
       end
     end
-
   end
 
   describe "POST /" do
-
     context "when an invalid commit url is provided" do
       let(:access_token) { "myaccesstoken" }
 
@@ -125,11 +130,9 @@ describe "The Contribution Checker app" do
         expect(last_response.body).to include("\"or_criteria_met\":true")
       end
     end
-
   end
 
   describe "GET /callback" do
-
     let(:code) { "mytempcode" }
     let(:access_token) { "myaccesstoken" }
 
@@ -146,11 +149,18 @@ describe "The Contribution Checker app" do
       expect(last_request.env["rack.session"][:access_token]).to eq(access_token)
       expect(last_response.status).to eq(302)
     end
+  end
 
+  describe "GET /how" do
+    it "shows the 'How does this work?' page" do
+      get "/how"
+
+      expect(last_response.status).to eq(200)
+      expect(last_response.headers["Content-Type"]).to eq("text/html;charset=utf-8")
+    end
   end
 
   describe "GET /ping" do
-
     it "redirects to request authorisation" do
       get "/ping"
 
@@ -158,5 +168,4 @@ describe "The Contribution Checker app" do
       expect(last_response.body).to eq("pong")
     end
   end
-
 end

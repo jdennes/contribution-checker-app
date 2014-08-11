@@ -1,135 +1,106 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>GitHub Contribution Checker</title>
-    <link href='/favicon.ico' rel='icon' type='image/x-icon'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.css">
-    <link rel="stylesheet" href="/octicons/octicons.css">
-    <link rel="stylesheet" href="/app.css">
-  </head>
-  <body>
-    <div class="container">
+<p class="lead text-left">Enter a public commit URL to check whether
+  it&rsquo;s counted as a
+  <a href="https://help.github.com/articles/why-are-my-contributions-not-showing-up-on-my-profile"
+    target="_blank">contribution</a>:
+</p>
 
-      <div class="page-header text-center">
-        <h1>
-          <a href="/"><span class="mega-octicon octicon-checklist"></span></a>
-          GitHub Contribution Checker</h1>
-        <p class="lead text-left">Enter a public commit URL to check whether
-          it&rsquo;s counted as a
-          <a href="https://help.github.com/articles/why-are-my-contributions-not-showing-up-on-my-profile"
-            target="_blank">contribution</a>:</p>
-      </div>
+<div id="err" class="alert alert-danger"></div>
+<script id="err-template" type="text/x-handlebars-template">
+  <strong>{{error_message}}</strong>
+</script>
 
-      <div id="err" class="alert alert-danger"></div>
-      <script id="err-template" type="text/x-handlebars-template">
-        <strong>{{error_message}}</strong>
-      </script>
+<form class="form" role="form" method="post">
+  <div class="form-group">
+    <input class="form-control span6" name="url"
+      placeholder="https://github.com/:user/:repo/commit/:sha" autofocus>
+  </div>
+</form>
 
-      <form class="form" role="form" method="post">
-        <div class="form-group">
-          <input class="form-control span6" name="url"
-            placeholder="https://github.com/:user/:repo/commit/:sha" autofocus>
-        </div>
-      </form>
+<div id="waiting">
+  <p class="lead text-muted text-center">
+    <span class="glyphicon glyphicon-flash flash"></span>
+    Hardcore API action. We&rsquo;ll be back in just a moment&#8230;</p>
+</div>
 
-      <div id="waiting">
-        <p class="lead text-muted text-center">
-          <span class="glyphicon glyphicon-flash flash"></span>
-          Hardcore API action. We&rsquo;ll be back in just a moment&#8230;</p>
-      </div>
+<div id="results"></div>
+<script id="results-template" type="text/x-handlebars-template">
+<p id="results-lead" class="lead">Your <a href="{{commit_url}}" target="_blank">commit</a>
+  <span class="bg-{{#if contribution}}success{{else}}danger{{/if}}">
+  {{#if contribution}}should be{{else}}will not be{{/if}}
+  counted</span> as a contribution! Check the details below:
+</p>
 
-      <div id="results"></div>
-      <script id="results-template" type="text/x-handlebars-template">
-      <p id="results-lead" class="lead">Your <a href="{{commit_url}}" target="_blank">commit</a>
-        <span class="bg-{{#if contribution}}success{{else}}danger{{/if}}">
-        {{#if contribution}}should be{{else}}will not be{{/if}}
-        counted</span> as a contribution! Check the details below:
-      </p>
+<div class="panel panel-{{#if and_criteria_met}}success{{else}}danger{{/if}}">
+  <div class="panel-heading">
+    <h4>All of the following rules need to be true</h4>
+  </div>
+  <table class="table table-condensed table-responsive">
+    <tr class="{{#if and_criteria.commit_in_valid_branch}}success{{else}}danger{{/if}}">
+      <td><span class="octicon octicon-{{#if and_criteria.commit_in_valid_branch}}check{{else}}x{{/if}}"></span></td>
+      <td>Is the commit in the default or gh-pages branch?</td>
+    </tr>
+    <tr class="{{#if and_criteria.commit_in_last_year}}success{{else}}danger{{/if}}">
+      <td><span class="octicon octicon-{{#if and_criteria.commit_in_last_year}}check{{else}}x{{/if}}"></span></td>
+      <td>Was the commit authored in the last year?</td>
+    </tr>
+    <tr class="{{#if and_criteria.repo_not_a_fork}}success{{else}}danger{{/if}}">
+      <td><span class="octicon octicon-{{#if and_criteria.repo_not_a_fork}}check{{else}}x{{/if}}"></span></td>
+      <td>Is the repository containing the commit <em>not</em> a fork?</td>
+    </tr>
+    <tr class="{{#if and_criteria.commit_email_linked_to_user}}success{{else}}danger{{/if}}">
+      <td><span class="octicon octicon-{{#if and_criteria.commit_email_linked_to_user}}check{{else}}x{{/if}}"></span></td>
+      <td>Have you added the email used to author the commit ({{and_criteria.commit_email}}) to your GitHub account?</td>
+    </tr>
+  </table>
+</div>
 
-      <div class="panel panel-{{#if and_criteria_met}}success{{else}}danger{{/if}}">
-        <div class="panel-heading">
-          <h4>All of the following rules need to be true</h4>
-        </div>
-        <table class="table table-condensed table-responsive">
-          <tr class="{{#if and_criteria.commit_in_valid_branch}}success{{else}}danger{{/if}}">
-            <td><span class="octicon octicon-{{#if and_criteria.commit_in_valid_branch}}check{{else}}x{{/if}}"></span></td>
-            <td>Is the commit in the default or gh-pages branch?</td>
-          </tr>
-          <tr class="{{#if and_criteria.commit_in_last_year}}success{{else}}danger{{/if}}">
-            <td><span class="octicon octicon-{{#if and_criteria.commit_in_last_year}}check{{else}}x{{/if}}"></span></td>
-            <td>Was the commit authored in the last year?</td>
-          </tr>
-          <tr class="{{#if and_criteria.repo_not_a_fork}}success{{else}}danger{{/if}}">
-            <td><span class="octicon octicon-{{#if and_criteria.repo_not_a_fork}}check{{else}}x{{/if}}"></span></td>
-            <td>Is the repository containing the commit <em>not</em> a fork?</td>
-          </tr>
-          <tr class="{{#if and_criteria.commit_email_linked_to_user}}success{{else}}danger{{/if}}">
-            <td><span class="octicon octicon-{{#if and_criteria.commit_email_linked_to_user}}check{{else}}x{{/if}}"></span></td>
-            <td>Have you added the email used to author the commit ({{and_criteria.commit_email}}) to your GitHub account?</td>
-          </tr>
-        </table>
-      </div>
+<div class="panel panel-{{#if or_criteria_met}}success{{else}}danger{{/if}}">
+  <div class="panel-heading">
+    <h4>At least one of the following rules needs to be true</h4>
+  </div>
+  <table class="table table-condensed table-responsive">
+    <tr class="{{#if or_criteria.user_has_starred_repo}}success{{else}}danger{{/if}}">
+      <td><span class="octicon octicon-{{#if or_criteria.user_has_starred_repo}}check{{else}}x{{/if}}"></span></td>
+      <td>Have you starred the repository containing the commit?</td>
+    </tr>
+    <tr class="{{#if or_criteria.user_can_push_to_repo}}success{{else}}danger{{/if}}">
+      <td><span class="octicon octicon-{{#if or_criteria.user_can_push_to_repo}}check{{else}}x{{/if}}"></span></td>
+      <td>Do you have push access to the repository?</td>
+    </tr>
+    <tr class="{{#if or_criteria.user_is_repo_org_member}}success{{else}}danger{{/if}}">
+      <td><span class="octicon octicon-{{#if or_criteria.user_is_repo_org_member}}check{{else}}x{{/if}}"></span></td>
+      <td>Are you a member of the organization that owns the repository?</td>
+    </tr>
+    <tr class="{{#if or_criteria.user_has_fork_of_repo}}success{{else}}danger{{/if}}">
+      <td><span class="octicon octicon-{{#if or_criteria.user_has_fork_of_repo}}check{{else}}x{{/if}}"></span>
+      <td>Do you own a fork of the repository containing the commit?</td>
+    </tr>
+  </table>
+</div>
+</script>
 
-      <div class="panel panel-{{#if or_criteria_met}}success{{else}}danger{{/if}}">
-        <div class="panel-heading">
-          <h4>At least one of the following rules needs to be true</h4>
-        </div>
-        <table class="table table-condensed table-responsive">
-          <tr class="{{#if or_criteria.user_has_starred_repo}}success{{else}}danger{{/if}}">
-            <td><span class="octicon octicon-{{#if or_criteria.user_has_starred_repo}}check{{else}}x{{/if}}"></span></td>
-            <td>Have you starred the repository containing the commit?</td>
-          </tr>
-          <tr class="{{#if or_criteria.user_can_push_to_repo}}success{{else}}danger{{/if}}">
-            <td><span class="octicon octicon-{{#if or_criteria.user_can_push_to_repo}}check{{else}}x{{/if}}"></span></td>
-            <td>Do you have push access to the repository?</td>
-          </tr>
-          <tr class="{{#if or_criteria.user_is_repo_org_member}}success{{else}}danger{{/if}}">
-            <td><span class="octicon octicon-{{#if or_criteria.user_is_repo_org_member}}check{{else}}x{{/if}}"></span></td>
-            <td>Are you a member of the organization that owns the repository?</td>
-          </tr>
-          <tr class="{{#if or_criteria.user_has_fork_of_repo}}success{{else}}danger{{/if}}">
-            <td><span class="octicon octicon-{{#if or_criteria.user_has_fork_of_repo}}check{{else}}x{{/if}}"></span>
-            <td>Do you own a fork of the repository containing the commit?</td>
-          </tr>
-        </table>
-      </div>
-      </script>
+<% if !recent_commits.empty? %>
+<div id="recent-commits">
+  <p class="lead">Or, check one of your recent public commits:</p>
+  <ul class="list-group">
+    <% for c in recent_commits.take(5) %>
+      <%= erb :commit, :locals => { :commit => c, :hidden => false } %>
+    <% end %>
+    <% for c in recent_commits.drop(5) %>
+      <%= erb :commit, :locals => { :commit => c, :hidden => true } %>
+    <% end %>
+    <% if recent_commits.length > 5 %>
+    <li class="list-group-item">
+      <a class="js-show-more-commits" href="#">Show more commits&#8230;</a>
+    </li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
 
-      <% if !recent_commits.empty? %>
-      <div id="recent-commits">
-        <p class="lead">Or, check one of your recent public commits:</p>
-        <ul class="list-group">
-          <% for c in recent_commits.take(5) %>
-            <%= erb :commit, :locals => { :commit => c, :hidden => false } %>
-          <% end %>
-          <% for c in recent_commits.drop(5) %>
-            <%= erb :commit, :locals => { :commit => c, :hidden => true } %>
-          <% end %>
-          <% if recent_commits.length > 5 %>
-          <li class="list-group-item">
-            <a class="js-show-more-commits" href="#">Show more commits&#8230;</a>
-          </li>
-          <% end %>
-        </ul>
-      </div>
-      <% end %>
-
-    </div>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.4/handlebars.min.js"></script>
-    <script src="/app.js"></script>
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-    
-      ga('create', 'UA-3769691-49', 'auto');
-      ga('send', 'pageview');
-    
-    </script>
-  </body>
-</html>
+<footer class="text-center">
+  <a href="/how">
+    <span class="octicon octicon-question"></span>
+    How does this work?
+  </a>
+</footer>

@@ -17,7 +17,7 @@ body {
 #results-lead span {
   padding: 2px 4px;
 }
-.table td:first-child {
+#results .table td:first-child {
   padding-left: 15px;
   width: 36px;
 }
@@ -49,4 +49,10 @@ body {
 }
 button.js-check-commit {
   margin-top: 4px;
+}
+#get-started {
+  margin-bottom: 30px;
+}
+footer {
+  padding-bottom: 20px;
 }

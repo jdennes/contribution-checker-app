@@ -11,6 +11,7 @@ $:.unshift File.expand_path('..', __FILE__)
 
 ENV["GITHUB_CLIENT_ID"] = "myclientid"
 ENV["GITHUB_CLIENT_SECRET"] = "myclientsecret"
+ENV["SESSION_SECRET"] = "mytestsessionsecret"
 
 require "./app"
 require "rspec"
