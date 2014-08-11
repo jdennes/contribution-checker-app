@@ -35,4 +35,13 @@
 <div id="get-started" class="text-center">
   <a href="/auth" class="btn btn-primary btn-lg">Get started</a>
 </div>
+<% else %>
+<footer class="text-center">
+  <% if authenticated %>
+    <a href="/">
+      <span class="octicon octicon-zap"></span>
+      Check some commits!
+    </a>
+  <% end %>
+</footer>
 <% end%>
