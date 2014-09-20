@@ -37,7 +37,7 @@
   <table class="table table-condensed table-responsive">
     <tr class="{{#if and_criteria.commit_in_valid_branch}}success{{else}}danger{{/if}}">
       <td><span class="octicon octicon-{{#if and_criteria.commit_in_valid_branch}}check{{else}}x{{/if}}"></span></td>
-      <td>Is the commit in the default or gh-pages branch?</td>
+      <td>Is the commit in the <em>{{and_criteria.default_branch}}</em> or <em>gh-pages</em> branch?</td>
     </tr>
     <tr class="{{#if and_criteria.commit_in_last_year}}success{{else}}danger{{/if}}">
       <td><span class="octicon octicon-{{#if and_criteria.commit_in_last_year}}check{{else}}x{{/if}}"></span></td>
