@@ -4,7 +4,7 @@ rvm:
 deploy:
   provider: heroku
   api_key:
-    secure: fl9mdZJFd/9jRgmQCSc5lq3LkaeG6x3mdXVnw2TLmshilllCYy1XndD8FzFGZQoOsnsmOLO6/qPODOwlWfQk33u3ne5DWDrOkcKM8vyV4WnP/G5o3LfLLhIS4tzYAyVOi/CM+E/iwn5ygFBLqtrBUMX9rpZpbj3atMba1kcuWx0=
+    secure: OByBG19LgnEGWBniNIobw5yic0znqRgrbEVSMzkGqqmbNUuA9WyFxv+zWTDGwbGqjJct+JiBPOOAWOUwUGeU23iHU9iOyiWVbe9/OxcYgGyIUMczRR4mA6HReCvC3PSO169Z9R3JhIIcAe+zRC0urgdPBEiTkaZNXTNSyLdT8ZM=
   app: contribution-checker
   on:
     branch: master
