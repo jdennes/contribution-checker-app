@@ -128,6 +128,7 @@ describe "The Contribution Checker app" do
         expect(last_response.body).to include("\"commit_url\":\"#{commit_url}\"")
         expect(last_response.body).to include("\"and_criteria_met\":true")
         expect(last_response.body).to include("\"or_criteria_met\":true")
+        expect(last_response.body).to include("\"default_branch_is_gh_pages\":false")
       end
     end
   end
