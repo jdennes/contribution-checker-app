@@ -90,6 +90,8 @@ post "/" do
       result[:or_criteria][:user_can_push_to_repo] ||
       result[:or_criteria][:user_is_repo_org_member] ||
       result[:or_criteria][:user_has_fork_of_repo]
+    result[:default_branch_is_gh_pages] =
+      result[:and_criteria][:default_branch] == "gh-pages"
 
   rescue ContributionChecker::InvalidCommitUrlError => err
     return json :error_message => err
