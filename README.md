@@ -4,7 +4,7 @@ People :heart: GitHub Contributions. However, it's not always simple to tell why
 
 This app lets you authenticate with GitHub and check whether a specific commit qualifies as a contribution, by using the [contribution-checker][contribution-checker] library.
 
-![contribution-checker](https://cloud.githubusercontent.com/assets/65057/3352063/2a90d4b4-fa31-11e3-8733-c52d5df05bad.png)
+![app](https://cloud.githubusercontent.com/assets/65057/6320756/b32c9328-bae6-11e4-9ba1-48ced9a5fb6e.png)
 
 Created by [@izuzak][izuzak] and [@jdennes][jdennes] at the [Hamburg Hackathon][hamburg-hackathon], June 2014.
 
