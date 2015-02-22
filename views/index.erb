@@ -77,6 +77,10 @@
       <td><span class="octicon octicon-{{#if or_criteria.user_has_fork_of_repo}}check{{else}}x{{/if}}"></span>
       <td>Do you own a fork of the repository containing the commit?</td>
     </tr>
+    <tr class="{{#if or_criteria.user_has_opened_issue_or_pr_in_repo}}success{{else}}danger{{/if}}">
+      <td><span class="octicon octicon-{{#if or_criteria.user_has_opened_issue_or_pr_in_repo}}check{{else}}x{{/if}}"></span>
+        <td>Have you opened an issue or pull request in the repository containing the commit?</td>
+    </tr>
   </table>
 </div>
 </script>

@@ -89,7 +89,8 @@ post "/" do
       result[:or_criteria][:user_has_starred_repo] ||
       result[:or_criteria][:user_can_push_to_repo] ||
       result[:or_criteria][:user_is_repo_org_member] ||
-      result[:or_criteria][:user_has_fork_of_repo]
+      result[:or_criteria][:user_has_fork_of_repo] ||
+      result[:or_criteria][:user_has_opened_issue_or_pr_in_repo]
     result[:default_branch_is_gh_pages] =
       result[:and_criteria][:default_branch] == "gh-pages"
 
