@@ -3,9 +3,9 @@ GEM
   specs:
     addressable (2.3.7)
     backports (3.6.4)
-    contribution-checker (1.2.0)
-      octokit (~> 3.3)
-    coveralls (0.7.10)
+    contribution-checker (1.2.1)
+      octokit (~> 3.8)
+    coveralls (0.7.11)
       multi_json (~> 1.10)
       rest-client (>= 1.6.8, < 2)
       simplecov (~> 0.9.1)
@@ -37,15 +37,15 @@ GEM
       rspec-core (~> 3.2.0)
       rspec-expectations (~> 3.2.0)
       rspec-mocks (~> 3.2.0)
-    rspec-core (3.2.0)
+    rspec-core (3.2.1)
       rspec-support (~> 3.2.0)
     rspec-expectations (3.2.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.2.0)
-    rspec-mocks (3.2.0)
+    rspec-mocks (3.2.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.2.0)
-    rspec-support (3.2.1)
+    rspec-support (3.2.2)
     safe_yaml (1.0.4)
     sawyer (0.6.0)
       addressable (~> 2.3.5)
@@ -80,10 +80,10 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.6)
-  contribution-checker (~> 1.0)
+  contribution-checker (~> 1.2)
   coveralls
   newrelic_rpm
-  octokit (~> 3.1)
+  octokit (~> 3.8)
   rake
   rspec
   simplecov
