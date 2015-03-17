@@ -15,4 +15,4 @@ group :development do
   gem "coveralls"
 end
 
-ruby "2.0.0"
+ruby "2.1.5"

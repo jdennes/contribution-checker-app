@@ -21,6 +21,7 @@ require "webmock/rspec"
 WebMock.disable_net_connect! :allow => "coveralls.io"
 
 RSpec.configure do |conf|
+  conf.color = true
   conf.include Rack::Test::Methods
 end
 
