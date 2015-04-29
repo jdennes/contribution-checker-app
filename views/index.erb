@@ -53,6 +53,10 @@
       <td><span class="octicon octicon-{{#if and_criteria.commit_email_linked_to_user}}check{{else}}x{{/if}}"></span></td>
       <td>Have you added the email used to author the commit ({{and_criteria.commit_email}}) to your GitHub account?</td>
     </tr>
+    <tr class="{{#if and_criteria.commit_email_is_not_generic}}success{{else}}danger{{/if}}">
+      <td><span class="octicon octicon-{{#if and_criteria.commit_email_is_not_generic}}check{{else}}x{{/if}}"></span></td>
+      <td>Is the email used to author the commit ({{and_criteria.commit_email}}) a non-generic email?</td>
+    </tr>
   </table>
 </div>
 
