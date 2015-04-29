@@ -2,7 +2,7 @@ source "http://rubygems.org"
 
 gem "sinatra",              "~> 1.4"
 gem "sinatra-contrib",      "~> 1.4"
-gem "contribution-checker", "~> 1.2"
+gem "contribution-checker", "~> 1.3"
 gem "octokit",              "~> 3.8"
 gem "newrelic_rpm"
 
