@@ -41,10 +41,6 @@
         {{#unless default_branch_is_gh_pages}}or <em>gh-pages</em>{{/unless}} branch?
       </td>
     </tr>
-    <tr class="{{#if and_criteria.commit_in_last_year}}success{{else}}danger{{/if}}">
-      <td><span class="octicon octicon-{{#if and_criteria.commit_in_last_year}}check{{else}}x{{/if}}"></span></td>
-      <td>Was the commit authored in the last year?</td>
-    </tr>
     <tr class="{{#if and_criteria.repo_not_a_fork}}success{{else}}danger{{/if}}">
       <td><span class="octicon octicon-{{#if and_criteria.repo_not_a_fork}}check{{else}}x{{/if}}"></span></td>
       <td>Is the repository containing the commit <em>not</em> a fork?</td>

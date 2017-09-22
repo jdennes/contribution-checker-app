@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-- 2.1.5
+- 2.4.2
 sudo: false
 deploy:
   provider: heroku
@@ -9,4 +9,4 @@ deploy:
   app: contribution-checker
   on:
     branch: master
-    rvm: 2.1.5
+    rvm: 2.4.2
