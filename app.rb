@@ -82,7 +82,6 @@ post "/" do
     result[:commit_url] = params[:url]
     result[:and_criteria_met] =
       result[:and_criteria][:commit_in_valid_branch] &&
-      result[:and_criteria][:commit_in_last_year] &&
       result[:and_criteria][:repo_not_a_fork] &&
       result[:and_criteria][:commit_email_linked_to_user]
     result[:or_criteria_met] =
